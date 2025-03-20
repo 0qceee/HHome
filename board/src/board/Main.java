@@ -46,8 +46,43 @@ public class Main {
 					System.out.println(createdBoard);
 				}
 				break;
-			
+			case 3:		// 게시글 조회
+				System.out.println("조회할 글 번호 : ");
+				int no = sc.nextInt();
+				sc.nextLine();
+				Board selectedBoard = boardInterface.read(no);
+				if (selectedBoard != null ) {
+					System.out.println(":::: 조회된 게시글 ::::");
+					System.out.println(selectedBoard);
+				}
+				break;
+			case 4:
+				System.out.println("수정할 글 번호 : ");
+				int updateNo = sc.nextInt();
+				sc.nextLine();
+				System.out.println("제목 : ");
+				String updateTitle = sc.nextLine();
+				System.out.println("작성자 : ");
+				String updateWriter = sc.nextLine();
+				System.out.println("내용 : ");
+				String updateContent = sc.nextLine();
+				Board updatedBoard = new Board(updateTitle, updateWriter,updateContent);
+				updatedBoard.setNo(updateNo);
+				boolean result = boardInterface.update(updatedBoard);
+				if (result) System.out.println("게시글 수정 완료!");
+				else System.out.println("게시글 수정 실패!");
+				break;
+			case 5:
+				System.out.print("삭제할 글 번호 : ");
+				int deleteNo = sc.nextInt();
+				sc.nextLine();
+				result = boardInterface.delete(deleteNo);
+				if (result)System.out.println("게시글 삭제 완료!");
+				else System.out.println("게시글 삭제 실패!");
+				break;
 			}
 		} while (true);
+		System.out.println("프로그램을 종료합니다...");
+		sc.close();
 	}
 }
